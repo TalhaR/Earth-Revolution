@@ -16,7 +16,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage){
         pane = new Pane(); // Creates a layout to hold nodes
-        scene = new Scene(pane, 900, 800, Color.BLACK);
+        scene = new Scene(pane, 1024, 720, Color.BLACK); // 720p resolution
         createBodies(); // Creates Circles for each celestial body
         addText(); // Displays text to show not to scale
 
