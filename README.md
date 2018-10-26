@@ -1,2 +1,2 @@
-# Earth-Revolution
-Using JavaFX to display an Earth-like object revolving around the Sun
+# Solar-System
+Using JavaFX to show the orbit of the planets in our Solay System around the Sun
