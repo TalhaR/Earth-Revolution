@@ -9,14 +9,14 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Launcher extends Application {
-    private Circle sun, mercury, venus, earth, mars;
+    private Circle sun, mercury, venus, earth, mars, moon;
     private Pane pane;
     private Scene scene;
 
     @Override
     public void start(Stage stage){
         pane = new Pane(); // Creates a layout to hold nodes
-        scene = new Scene(pane, 600, 600, Color.BLACK);
+        scene = new Scene(pane, 800, 800, Color.BLACK);
         createBodies(); // Creates Circles for each celestial body
         addText(); // Displays text to show not to scale
 
@@ -52,7 +52,7 @@ public class Launcher extends Application {
 
         venus = new Circle();
         venus.setRadius(10);
-        venus.setFill(Color.LIGHTYELLOW);
+        venus.setFill(Color.SANDYBROWN);
         venus.setStroke(Color.BEIGE);
 
         earth = new Circle();
@@ -60,12 +60,17 @@ public class Launcher extends Application {
         earth.setFill(Color.BLUE); // Earth is filled with water so Blue
         earth.setStroke(Color.GREEN); // There's still some land so some Green
 
+        moon = new Circle();
+        moon.setRadius(3);
+        moon.setFill(Color.GREY);
+        moon.setStroke(Color.DARKGRAY);
+
         mars = new Circle();
         mars.setRadius(7);
         mars.setFill(Color.DARKORANGE);
         mars.setStroke(Color.ORANGERED);
 
-        pane.getChildren().addAll(sun,mercury,venus,earth,mars); // Adds circles to Pane
+        pane.getChildren().addAll(sun,mercury,venus,earth,moon,mars); // Adds circles to Pane
     }
     private void animate(){
         final long startTime = System.nanoTime(); // stores starting time
@@ -75,28 +80,42 @@ public class Launcher extends Application {
         AnimationTimer at = new AnimationTimer(){
             @Override
             public void handle(long now) {
-                double t = (now - startTime) / 1000000000.0; // ticks 128 times per second
+                double t1 = (now - startTime) / 480000000.0;
+                double t2 = (now - startTime) / 1240000000.0;
+                double t3 = (now - startTime) / 2000000000.0; // ticks 64 times per second
+                double t4 = (now - startTime) / 600000000.0;
+                double t5 = (now - startTime) / 3600000000.0;
+
                 // never thought I'd see the day where trig came in handy
-                double x1 = sun.getCenterX() + 70 * Math.cos(t); // new x coordinate for Mercury
-                double y1 = sun.getCenterY() + 70 * Math.sin(t); // new y coordinate for Mercury
+                double x1 = sun.getCenterX() + 70 * Math.cos(t1); // new x coordinate for Mercury
+                double y1 = sun.getCenterY() + 70 * Math.sin(t1); // new y coordinate for Mercury
                 // venus coordinates
-                double x2 = sun.getCenterX() + 100 * Math.cos(t);
-                double y2 = sun.getCenterY() + 100 * Math.sin(t);
+                double x2 = sun.getCenterX() + 100 * Math.cos(t2);
+                double y2 = sun.getCenterY() + 100 * Math.sin(t2);
                 // earth coordinates
-                double x3 = sun.getCenterX() + 135 * Math.cos(t);
-                double y3 = sun.getCenterY() + 135 * Math.sin(t);
+                double x3 = sun.getCenterX() + 145 * Math.cos(t3);
+                double y3 = sun.getCenterY() + 145 * Math.sin(t3);
+                // moon coordinates
+                double x4 = earth.getCenterX() + 20 * Math.cos(t4); 
+                double y4 = earth.getCenterY() + 20 * Math.sin(t4);
                 // mars coordinates
-                double x4 = sun.getCenterX() + 175 * Math.cos(t);
-                double y4 = sun.getCenterY() + 175 * Math.sin(t);
+                double x5 = sun.getCenterX() + 195 * Math.cos(t5);
+                double y5 = sun.getCenterY() + 195 * Math.sin(t5);
 
                 mercury.setCenterX(x1);
                 mercury.setCenterY(y1);
+
                 venus.setCenterX(x2);
                 venus.setCenterY(y2);
+
                 earth.setCenterX(x3);
                 earth.setCenterY(y3);
-                mars.setCenterX(x4);
-                mars.setCenterY(y4);
+
+                moon.setCenterX(x4);
+                moon.setCenterY(y4);
+
+                mars.setCenterX(x5);
+                mars.setCenterY(y5);
             }
         };
         at.start();
