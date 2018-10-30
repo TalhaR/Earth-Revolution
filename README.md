@@ -5,4 +5,4 @@ Animation of the planets in our Solar System orbiting around the Sun using JavaF
 Download the files located in the "release x" folder and run the "runme" bat file
 
 # Caution
-* Works in JDK 10.0.2
+Requires JDK 10.0.2
