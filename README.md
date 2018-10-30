@@ -2,4 +2,7 @@
 Animation of the planets in our Solar System orbiting around the Sun using JavaFX
 
 # Instructions
-Download the Jar file located in the "release x" folder and run the program
+Download the files located in the "release x" folder and run the "runme" bat file
+
+# Caution
+* Works in JDK 10.0.2
